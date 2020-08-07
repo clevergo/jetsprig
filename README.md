@@ -6,6 +6,8 @@
 [![Release](https://img.shields.io/github/release/clevergo/jetsprig.svg?style=for-the-badge)](https://github.com/clevergo/jetsprig/releases)
 [![Downloads](https://img.shields.io/endpoint?url=https://pkg.clevergo.tech/api/badges/downloads/month/clevergo.tech/jetsprig&style=for-the-badge)](https://pkg.clevergo.tech/)
 
+This library inspired by [Masterminds/sprig)](https://github.com/Masterminds/sprig).
+
 ```shell
 $ go get -u clevergo.tech/jetsprig
 ```
