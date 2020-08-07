@@ -8,6 +8,7 @@ import "github.com/CloudyKit/jet/v5"
 
 var funcMap = map[string]jet.Func{
 	// string
+	"join":       Join,
 	"title":      Title,
 	"trim":       Trim,
 	"trimPrefix": TrimPreffix,

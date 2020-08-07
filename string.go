@@ -34,3 +34,9 @@ func TrimSuffix(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("trimPSuffix", 2, 2)
 	return reflect.ValueOf(strings.TrimSuffix(args.Get(0).String(), args.Get(1).String()))
 }
+
+// Join wraps strings.Join.
+func Join(args jet.Arguments) reflect.Value {
+	args.RequireNumOfArguments("join", 2, 2)
+	return reflect.ValueOf(strings.Join(args.Get(0).Interface().([]string), args.Get(1).String()))
+}

@@ -34,3 +34,10 @@ func TestTrimSuffix(t *testing.T) {
 		executeTestTemplate(t, "title", `{{ trimSuffix(.s, .suffix) }}`, nil, map[string]string{"s": s, "suffix": suffix}, strings.TrimSuffix(s, suffix))
 	}
 }
+
+func TestJoin(t *testing.T) {
+	sep := " "
+	for _, s := range [][]string{{"foo"}, {"foo", "bar"}} {
+		executeTestTemplate(t, "title", `{{ join(.s, .sep) }}`, nil, map[string]interface{}{"s": s, "sep": sep}, strings.Join(s, sep))
+	}
+}

@@ -25,10 +25,11 @@ jetsprig.AttachTo(jetsprig.FuncMap(), testSet)
 
 ## Functions
 
-| **String** | |
-|:---|:---
-| `trim` | `strings.TrimSpace` 
-| `trimPrefix` | `strings.TrimPrefix` 
-| `trimSuffix` | `strings.TrimSuffix` 
+| **String**      |                     |
+|:----------------|:---
+| `trim`          | `strings.TrimSpace` 
+| `trimPrefix`    | `strings.TrimPrefix` 
+| `trimSuffix`    | `strings.TrimSuffix` 
+| `join`          | `strings.Join`
 | **Date** 
-| `now` | `time.Now` 
+| `now`           | `time.Now` 
