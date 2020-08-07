@@ -19,7 +19,7 @@ func Title(args jet.Arguments) reflect.Value {
 
 // Trim wraps strings.TrimSpace.
 func Trim(args jet.Arguments) reflect.Value {
-	args.RequireNumOfArguments("trimSpace", 1, 1)
+	args.RequireNumOfArguments("trim", 1, 1)
 	return reflect.ValueOf(strings.TrimSpace(args.Get(0).String()))
 }
 
@@ -31,6 +31,6 @@ func TrimPreffix(args jet.Arguments) reflect.Value {
 
 // TrimSuffix wraps strings.TrimSuffix.
 func TrimSuffix(args jet.Arguments) reflect.Value {
-	args.RequireNumOfArguments("trimPrefix", 2, 2)
+	args.RequireNumOfArguments("trimPSuffix", 2, 2)
 	return reflect.ValueOf(strings.TrimSuffix(args.Get(0).String(), args.Get(1).String()))
 }
