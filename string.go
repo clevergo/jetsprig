@@ -11,25 +11,25 @@ import (
 	"github.com/CloudyKit/jet/v5"
 )
 
-// Title wraps strings.Title.
+// Title converts a string to title case.
 func Title(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("title", 1, 1)
 	return reflect.ValueOf(strings.Title(args.Get(0).String()))
 }
 
-// Trim wraps strings.TrimSpace.
+// Trim removes space from either side of a string.
 func Trim(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("trim", 1, 1)
 	return reflect.ValueOf(strings.TrimSpace(args.Get(0).String()))
 }
 
-// TrimPreffix wraps strings.TrimPreffix.
-func TrimPreffix(args jet.Arguments) reflect.Value {
+// TrimPrefix removes the prefix of a string.
+func TrimPrefix(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("trimPrefix", 2, 2)
 	return reflect.ValueOf(strings.TrimPrefix(args.Get(0).String(), args.Get(1).String()))
 }
 
-// TrimSuffix wraps strings.TrimSuffix.
+// TrimSuffix removes the suffix of a string.
 func TrimSuffix(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("trimPSuffix", 2, 2)
 	return reflect.ValueOf(strings.TrimSuffix(args.Get(0).String(), args.Get(1).String()))

@@ -21,7 +21,7 @@ var genericFuncMap = map[string]jet.Func{
 	"join":       Join,
 	"title":      Title,
 	"trim":       Trim,
-	"trimPrefix": TrimPreffix,
+	"trimPrefix": TrimPrefix,
 	"trimSuffix": TrimSuffix,
 
 	// date
