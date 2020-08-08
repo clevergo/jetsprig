@@ -27,6 +27,7 @@ var genericFuncMap = map[string]jet.Func{
 	// date
 	"now":  Now,
 	"date": Date,
+	"ago":  Ago,
 }
 
 // GenericFuncMap returns generic functions.

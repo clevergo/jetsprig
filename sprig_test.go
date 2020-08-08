@@ -21,16 +21,24 @@ func TestMain(m *testing.M) {
 	m.Run()
 }
 
-func executeTestTemplate(t *testing.T, name, template string, vars jet.VarMap, data interface{}, expected string) {
-	tmpl, err := testSet.Parse(name, template)
+func executeTestTemplate(name, template string, vars jet.VarMap, data interface{}) (string, error) {
+	t, err := testSet.Parse(name, template)
 	if err != nil {
-		t.Fatal(err)
+		return "", err
+	}
+	var out bytes.Buffer
+	err = t.Execute(&out, vars, data)
+	if err != nil {
+		return "", err
 	}
 
-	var out bytes.Buffer
-	err = tmpl.Execute(&out, vars, data)
+	return out.String(), nil
+}
+
+func runTest(t *testing.T, name, template string, vars jet.VarMap, data interface{}, expected string) {
+	out, err := executeTestTemplate(name, template, vars, data)
 	if err != nil {
 		t.Fatal(err)
 	}
-	assert.Equal(t, expected, out.String())
+	assert.Equal(t, expected, out)
 }

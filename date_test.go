@@ -5,7 +5,6 @@
 package jetsprig
 
 import (
-	"bytes"
 	"strconv"
 	"testing"
 	"time"
@@ -14,19 +13,13 @@ import (
 )
 
 func TestNow(t *testing.T) {
-	tmpl, err := testSet.Parse("now", "{{ now().UnixNano() }}")
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	startedAt := time.Now()
-	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, nil, nil)
+	out, err := executeTestTemplate("now", "{{ now().UnixNano() }}", nil, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	sec, err := strconv.ParseInt(buf.String(), 10, 64)
+	sec, err := strconv.ParseInt(out, 10, 64)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -38,5 +31,19 @@ func TestNow(t *testing.T) {
 func TestDate(t *testing.T) {
 	layout := "2006-01-02"
 	date := time.Now()
-	executeTestTemplate(t, "date", `{{ date(.date, .layout) }}`, nil, map[string]interface{}{"date": date, "layout": layout}, date.Format(layout))
+	runTest(t, "date", `{{ date(.date, .layout) }}`, nil, map[string]interface{}{"date": date, "layout": layout}, date.Format(layout))
+}
+
+func TestAgo(t *testing.T) {
+	date := time.Now().Add(-time.Second)
+	out, err := executeTestTemplate("ago", `{{ ago(.date) }}`, nil, map[string]interface{}{"date": date})
+	if err != nil {
+		t.Fatal(err)
+	}
+	duration, err := time.ParseDuration(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.True(t, duration > time.Second)
+	assert.True(t, duration < 2*time.Second)
 }

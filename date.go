@@ -21,3 +21,10 @@ func Date(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("date", 2, 2)
 	return reflect.ValueOf(args.Get(0).Interface().(time.Time).Format(args.Get(1).String()))
 }
+
+// Ago wraps time.Format.
+func Ago(args jet.Arguments) reflect.Value {
+	args.RequireNumOfArguments("ago", 1, 1)
+	u := args.Get(0).Interface().(time.Time)
+	return reflect.ValueOf(time.Now().Sub(u).String())
+}

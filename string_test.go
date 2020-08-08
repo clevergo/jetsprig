@@ -11,33 +11,33 @@ import (
 
 func TestTitle(t *testing.T) {
 	for _, s := range []string{"foo", "bar", "foo bar"} {
-		executeTestTemplate(t, "title", `{{ .s | title }}`, nil, map[string]string{"s": s}, strings.Title(s))
+		runTest(t, "title", `{{ .s | title }}`, nil, map[string]string{"s": s}, strings.Title(s))
 	}
 }
 
 func TestTrim(t *testing.T) {
 	for _, s := range []string{"foo", " foo", "foo "} {
-		executeTestTemplate(t, "trim", `{{ .s | trim }}`, nil, map[string]string{"s": s}, strings.TrimSpace(s))
+		runTest(t, "trim", `{{ .s | trim }}`, nil, map[string]string{"s": s}, strings.TrimSpace(s))
 	}
 }
 
 func TestTrimPrefix(t *testing.T) {
 	prefix := "foo"
 	for _, s := range []string{"bar", " foobar", "foo bar"} {
-		executeTestTemplate(t, "title", `{{ trimPrefix(.s, .prefix) }}`, nil, map[string]string{"s": s, "prefix": prefix}, strings.TrimPrefix(s, prefix))
+		runTest(t, "title", `{{ trimPrefix(.s, .prefix) }}`, nil, map[string]string{"s": s, "prefix": prefix}, strings.TrimPrefix(s, prefix))
 	}
 }
 
 func TestTrimSuffix(t *testing.T) {
 	suffix := "bar"
 	for _, s := range []string{"foo", " foobar", "foo bar"} {
-		executeTestTemplate(t, "title", `{{ trimSuffix(.s, .suffix) }}`, nil, map[string]string{"s": s, "suffix": suffix}, strings.TrimSuffix(s, suffix))
+		runTest(t, "title", `{{ trimSuffix(.s, .suffix) }}`, nil, map[string]string{"s": s, "suffix": suffix}, strings.TrimSuffix(s, suffix))
 	}
 }
 
 func TestJoin(t *testing.T) {
 	sep := " "
 	for _, s := range [][]string{{"foo"}, {"foo", "bar"}} {
-		executeTestTemplate(t, "title", `{{ join(.s, .sep) }}`, nil, map[string]interface{}{"s": s, "sep": sep}, strings.Join(s, sep))
+		runTest(t, "title", `{{ join(.s, .sep) }}`, nil, map[string]interface{}{"s": s, "sep": sep}, strings.Join(s, sep))
 	}
 }
