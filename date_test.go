@@ -34,3 +34,9 @@ func TestNow(t *testing.T) {
 	assert.True(t, sec > startedAt.UnixNano())
 	assert.True(t, sec < time.Now().UnixNano())
 }
+
+func TestDate(t *testing.T) {
+	layout := "2006-01-02"
+	date := time.Now()
+	executeTestTemplate(t, "date", `{{ date(.date, .layout) }}`, nil, map[string]interface{}{"date": date, "layout": layout}, date.Format(layout))
+}

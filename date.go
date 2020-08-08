@@ -15,3 +15,9 @@ import (
 func Now(jet.Arguments) reflect.Value {
 	return reflect.ValueOf(time.Now())
 }
+
+// Date wraps time.Format.
+func Date(args jet.Arguments) reflect.Value {
+	args.RequireNumOfArguments("date", 2, 2)
+	return reflect.ValueOf(args.Get(0).Interface().(time.Time).Format(args.Get(1).String()))
+}

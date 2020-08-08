@@ -35,3 +35,4 @@ jetsprig.AttachTo(jetsprig.FuncMap(), testSet)
 | `join`          | `strings.Join`
 | **Date** 
 | `now`           | `time.Now` 
+| `date`          | `time.Time.Format`

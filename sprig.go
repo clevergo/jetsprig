@@ -15,7 +15,8 @@ var funcMap = map[string]jet.Func{
 	"trimSuffix": TrimSuffix,
 
 	// date
-	"now": Now,
+	"now":  Now,
+	"date": Date,
 }
 
 // FuncMap returns all functions.
