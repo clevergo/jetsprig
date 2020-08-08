@@ -11,18 +11,18 @@ import (
 	"github.com/CloudyKit/jet/v5"
 )
 
-// Now wraps time.Now.
+// Now returns the current local time.
 func Now(jet.Arguments) reflect.Value {
 	return reflect.ValueOf(time.Now())
 }
 
-// Date wraps time.Format.
+// Date formats a date with the given layout.
 func Date(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("date", 2, 2)
 	return reflect.ValueOf(args.Get(0).Interface().(time.Time).Format(args.Get(1).String()))
 }
 
-// Ago wraps time.Format.
+// Ago returns duration from time.Now in seconds resolution.
 func Ago(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("ago", 1, 1)
 	u := args.Get(0).Interface().(time.Time)
