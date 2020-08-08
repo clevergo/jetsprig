@@ -22,7 +22,7 @@ import (
 
 set := jet.NewHTMLSet("")
 // attaches functions to Set.
-jetsprig.AttachTo(jetsprig.FuncMap(), testSet)
+jetsprig.GenericFuncMap().AttachTo(set)
 ```
 
 ## Functions

@@ -6,7 +6,17 @@ package jetsprig
 
 import "github.com/CloudyKit/jet/v5"
 
-var funcMap = map[string]jet.Func{
+// FuncMap is a set of functions.
+type FuncMap map[string]jet.Func
+
+// AttachTo attaches function to Set.
+func (fm FuncMap) AttachTo(set *jet.Set) {
+	for name, fn := range fm {
+		set.AddGlobalFunc(name, fn)
+	}
+}
+
+var genericFuncMap = map[string]jet.Func{
 	// string
 	"join":       Join,
 	"title":      Title,
@@ -19,18 +29,11 @@ var funcMap = map[string]jet.Func{
 	"date": Date,
 }
 
-// FuncMap returns all functions.
-func FuncMap() map[string]jet.Func {
-	m := make(map[string]jet.Func, len(funcMap))
-	for name, fn := range funcMap {
+// GenericFuncMap returns generic functions.
+func GenericFuncMap() FuncMap {
+	m := make(FuncMap, len(genericFuncMap))
+	for name, fn := range genericFuncMap {
 		m[name] = fn
 	}
 	return m
-}
-
-// AttachTo attaches functions to Set.
-func AttachTo(funcMap map[string]jet.Func, set *jet.Set) {
-	for name, fn := range funcMap {
-		set.AddGlobalFunc(name, fn)
-	}
 }

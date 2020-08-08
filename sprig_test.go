@@ -16,7 +16,7 @@ var testSet *jet.Set
 
 func TestMain(m *testing.M) {
 	testSet = jet.NewHTMLSet("")
-	AttachTo(FuncMap(), testSet)
+	GenericFuncMap().AttachTo(testSet)
 
 	m.Run()
 }
