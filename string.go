@@ -40,3 +40,14 @@ func Join(args jet.Arguments) reflect.Value {
 	args.RequireNumOfArguments("join", 2, 2)
 	return reflect.ValueOf(strings.Join(args.Get(0).Interface().([]string), args.Get(1).String()))
 }
+
+// Abbrev
+func Abbrev(args jet.Arguments) reflect.Value {
+	args.RequireNumOfArguments("join", 2, 2)
+	s := args.Get(0).String()
+	width := args.Get(1).Interface().(int)
+	if len(s) < 4 || width < 4 || len(s) < width-3 {
+		return reflect.ValueOf(s)
+	}
+	return reflect.ValueOf(s[:width-3] + "...")
+}

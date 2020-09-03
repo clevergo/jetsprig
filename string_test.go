@@ -41,3 +41,26 @@ func TestJoin(t *testing.T) {
 		runTest(t, "title", `{{ join(.s, .sep) }}`, nil, map[string]interface{}{"s": s, "sep": sep}, strings.Join(s, sep))
 	}
 }
+
+func TestAbbrev(t *testing.T) {
+	cases := []struct {
+		S        string
+		Width    int
+		expected string
+	}{
+		{"foobar", 0, "foobar"},
+		{"foobar", 1, "foobar"},
+		{"foobar", 2, "foobar"},
+		{"foobar", 3, "foobar"},
+		{"foobar", 4, "f..."},
+		{"foobar", 5, "fo..."},
+		{"foobar", 6, "foo..."},
+		{"foobar", 7, "foob..."},
+		{"foobar", 8, "fooba..."},
+		{"foobar", 9, "foobar"},
+		{"foobar", 10, "foobar"},
+	}
+	for _, test := range cases {
+		runTest(t, "abbrev", `{{ abbrev(.S, .Width) }}`, nil, test, test.expected)
+	}
+}

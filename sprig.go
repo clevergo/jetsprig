@@ -18,6 +18,7 @@ func (fm FuncMap) AttachTo(set *jet.Set) {
 
 var genericFuncMap = map[string]jet.Func{
 	// string
+	"abbrev":     Abbrev,
 	"join":       Join,
 	"title":      Title,
 	"trim":       Trim,
