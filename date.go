@@ -18,8 +18,23 @@ func Now(jet.Arguments) reflect.Value {
 
 // Date formats a date with the given layout.
 func Date(args jet.Arguments) reflect.Value {
-	args.RequireNumOfArguments("date", 2, 2)
-	return reflect.ValueOf(args.Get(0).Interface().(time.Time).Format(args.Get(1).String()))
+	args.RequireNumOfArguments("date", 1, 2)
+	format := "2006-01-02"
+	if args.NumOfArguments() > 1 {
+		format = args.Get(1).String()
+	}
+	return reflect.ValueOf(args.Get(0).Interface().(time.Time).Format(format))
+}
+
+// DateInZone returns the copy of same time instant with the given
+// time zone.
+func DateInZone(args jet.Arguments) reflect.Value {
+	args.RequireNumOfArguments("dateInZone", 2, 2)
+	loc, err := time.LoadLocation(args.Get(1).String())
+	if err != nil {
+		panic(err)
+	}
+	return reflect.ValueOf(args.Get(0).Interface().(time.Time).In(loc))
 }
 
 // Ago returns duration from time.Now in seconds resolution.

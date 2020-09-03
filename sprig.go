@@ -25,9 +25,10 @@ var genericFuncMap = map[string]jet.Func{
 	"trimSuffix": TrimSuffix,
 
 	// date
-	"now":  Now,
-	"date": Date,
-	"ago":  Ago,
+	"now":        Now,
+	"date":       Date,
+	"dateInZone": DateInZone,
+	"ago":        Ago,
 }
 
 // GenericFuncMap returns generic functions.

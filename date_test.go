@@ -34,6 +34,32 @@ func TestDate(t *testing.T) {
 	runTest(t, "date", `{{ date(.date, .layout) }}`, nil, map[string]interface{}{"date": date, "layout": layout}, date.Format(layout))
 }
 
+func TestDateInZone(t *testing.T) {
+	layout := "2006-01-02"
+	date := time.Now()
+
+	for _, test := range []struct {
+		zone string
+	}{
+		{"Asia/Shanghai"},
+		{"Asia/Nil"},
+	} {
+		loc, err := time.LoadLocation(test.zone)
+		tmpl := `{{ dateInZone(.date, .zone) | date(_, .layout) }}`
+		data := map[string]interface{}{
+			"date":   date,
+			"layout": layout,
+			"zone":   test.zone,
+		}
+		if err != nil {
+			_, err = executeTestTemplate("dateInZone", tmpl, nil, data)
+			assert.NotNil(t, err)
+		} else {
+			runTest(t, "dateInZone", tmpl, nil, data, date.In(loc).Format(layout))
+		}
+	}
+}
+
 func TestAgo(t *testing.T) {
 	date := time.Now().Add(-time.Second)
 	out, err := executeTestTemplate("ago", `{{ ago(.date) }}`, nil, map[string]interface{}{"date": date})
